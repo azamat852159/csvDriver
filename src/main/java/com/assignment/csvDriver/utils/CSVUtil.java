@@ -37,15 +37,16 @@ public class CSVUtil {
                 .build();
 
         try (final CSVPrinter printer = new CSVPrinter(sw, csvFormat)) {
-            csvdaos.forEach(x -> {
+            csvdaos.forEach(record -> {
                 try {
-                    printer.printRecord(x.getCode(),
-                            x.getCodeListCode(),
-                            x.getDisplayValue(),
-                            x.getFromDate(),
-                            x.getToDate(),
-                            x.getLongDescription(),
-                            x.getSortingPriority());
+                    printer.printRecord(record.getSource(),
+                            record.getCodeListCode(),
+                            record.getCode(),
+                            record.getDisplayValue(),
+                            record.getLongDescription(),
+                            record.getFromDate(),
+                            record.getToDate(),
+                            record.getSortingPriority());
                 } catch (IOException e) {
                     throw new RuntimeException("creating CSV file failed");                }
             });
